@@ -19,3 +19,5 @@ jobs:
       uses: actions/checkout@v4
     - name: Deploy Kedro-Viz to GH Pages
       uses: ./
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
