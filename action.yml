@@ -1,0 +1,3 @@
+name: shareableviz-action
+description: This is an action to publish kedro viz to GitHub Pages
+author: Ravi Kumar Pilla
