@@ -23,9 +23,13 @@ runs:
       # - name: Create build directory
       #   run: kedro viz build
       #   shell: bash
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./temp_build
+      #     force_orphan: true
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./temp_build
-          force_orphan: true
+          folder: ./temp_build
