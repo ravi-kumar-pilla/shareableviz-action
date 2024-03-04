@@ -6,9 +6,15 @@ branding:
   color: yellow
 
 inputs:
-  github_token:
-    description: 'Set a generated GITHUB_TOKEN for pushing to the remote branch.'
-    required: true
+  deploy_branch:
+    description: 'Set a github pages deployment branch. Defaults to gh-pages'
+    required: false
+    default: 'gh-pages'
+  commit_message:
+    description: 'Set a commit message for the deployment. Defaults to your original commit message'
+    required: false
+    default: ${{ github.event.head_commit.message }}
+
 
 runs:
   using: "composite"
@@ -29,14 +35,18 @@ runs:
       # - name: Create build directory
       #   run: kedro viz build
       #   shell: bash
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ inputs.github_token }}
-          publish_dir: ./temp_build
-          force_orphan: true
-          full_commit_message: ${{ github.event.head_commit.message }}
       # - name: Deploy to GitHub Pages
-      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     folder: ./build
+      #     github_token: ${{ inputs.github_token }}
+      #     publish_dir: ./temp_build
+      #     force_orphan: true
+      #     full_commit_message: ${{ github.event.head_commit.message }}
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./build
+          branch: ${{ inputs.deploy_branch }}
+          commit-message: ${{ inputs.commit_message }}
+
+
