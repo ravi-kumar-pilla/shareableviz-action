@@ -9,20 +9,20 @@ runs:
   steps:
       - name: Fetch the repository
         uses: actions/checkout@v4
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: "3.11"
-      #     cache: "pip"
-      # - name: Install dependencies
-      #   run: pip install -r requirements.txt
-      #   shell: bash
-      # - name: Consent to the use of Kedro-Telemetry
-      #   run: "echo 'consent: true' > .telemetry"
-      #   shell: bash
-      # - name: Create build directory
-      #   run: kedro viz build
-      #   shell: bash
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        shell: bash
+      - name: Consent to the use of Kedro-Telemetry
+        run: "echo 'consent: true' > .telemetry"
+        shell: bash
+      - name: Create build directory
+        run: kedro viz build
+        shell: bash
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
@@ -32,4 +32,4 @@ runs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./temp_build
+          folder: ./build
