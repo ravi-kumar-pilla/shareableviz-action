@@ -1,52 +1,47 @@
 name: kedro-viz-gh-deploy-test
 description: This is a test action to publish kedro viz static website on GitHub Pages
 author: Ravi Kumar Pilla
+
 branding:
   icon: share
   color: yellow
 
 inputs:
   deploy_branch:
-    description: 'Set a github pages deployment branch. Defaults to gh-pages'
+    description: "Set a github pages deployment branch. Defaults to gh-pages"
     required: false
-    default: 'gh-pages'
+    default: "gh-pages"
   commit_message:
-    description: 'Set a commit message for the deployment. Defaults to your original commit message'
+    description: "Set a commit message for the deployment. Defaults to your original commit message"
     required: false
     default: ${{ github.event.head_commit.message }}
-
+  telemetry_consent:
+    description: "Set your consent if you would like to participate in Kedro-Telemetry. Defaults to True"
+    required: false
+    default: true
 
 runs:
   using: "composite"
   steps:
-      - name: Fetch the repository
-        uses: actions/checkout@v4
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: "3.11"
-      #     cache: "pip"
-      # - name: Install dependencies
-      #   run: pip install -r requirements.txt
-      #   shell: bash
-      # - name: Consent to the use of Kedro-Telemetry
-      #   run: "echo 'consent: true' > .telemetry"
-      #   shell: bash
-      # - name: Create build directory
-      #   run: kedro viz build
-      #   shell: bash
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ inputs.github_token }}
-      #     publish_dir: ./temp_build
-      #     force_orphan: true
-      #     full_commit_message: ${{ github.event.head_commit.message }}
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: ./temp_build
-          branch: ${{ inputs.deploy_branch }}
-          commit-message: ${{ inputs.commit_message }}
-
-
+    - name: Fetch the repository
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+        cache: "pip"
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+      shell: bash
+    - name: Consent to the use of Kedro-Telemetry
+      run: "echo 'consent: ${{ inputs.telemetry_consent }}' > .telemetry"
+      shell: bash
+    - name: Create build directory
+      run: kedro viz build
+      shell: bash
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: ./build
+        branch: ${{ inputs.deploy_branch }}
+        commit-message: ${{ inputs.commit_message }}
