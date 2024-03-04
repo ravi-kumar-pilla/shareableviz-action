@@ -1,3 +1,29 @@
-name: shareableviz-action
-description: This is an action to publish kedro viz to GitHub Pages
+name: kedro-viz-gh-deploy-test
+description: This is a test action to publish kedro viz static website on GitHub Pages
 author: Ravi Kumar Pilla
+branding:
+  icon: share
+  color: yellow
+runs:
+  using: "composite"
+  steps:
+      - name: Fetch the repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Consent to the use of Kedro-Telemetry
+        run: "echo 'consent: true' > .telemetry"
+      - name: Create build directory
+        run: kedro viz build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          force_orphan: true
