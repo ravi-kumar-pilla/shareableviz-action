@@ -16,10 +16,13 @@ runs:
           cache: "pip"
       - name: Install dependencies
         run: pip install -r requirements.txt
+        shell: bash
       - name: Consent to the use of Kedro-Telemetry
         run: "echo 'consent: true' > .telemetry"
+        shell: bash
       - name: Create build directory
         run: kedro viz build
+        shell: bash
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   if: github.ref == 'refs/heads/main'
