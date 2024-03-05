@@ -21,4 +21,4 @@ jobs:
         with:
           deploy_branch: "test-deploy"
           commit_message: "my test deployment"
-          telemetry_consent: false
+          telemetry_consent: true
