@@ -19,6 +19,14 @@ inputs:
     description: "Set your consent if you would like to participate in Kedro-Telemetry. Defaults to True"
     required: false
     default: true
+  python_version:
+    description: 'Version of python to set up'
+    required: false
+    default: '3.11'
+  github_token:
+    description: 'GitHub token'
+    default: ${{ github.token }}
+    required: false
 
 runs:
   using: "composite"
@@ -28,20 +36,33 @@ runs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: "3.11"
+        python-version: ${{ inputs.python_version }}
         cache: "pip"
     - name: Install dependencies
-      run: pip install -r requirements.txt
       shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install "kedro-viz>=7.1.0"
+        pip install -r requirements.txt
     - name: Consent to the use of Kedro-Telemetry
       run: "echo 'consent: ${{ inputs.telemetry_consent }}' > .telemetry"
       shell: bash
     - name: Create build directory
       run: kedro viz build
       shell: bash
+    # - name: Deploy to GitHub Pages
+    #   uses: JamesIves/github-pages-deploy-action@v4
+    #   with:
+    #     folder: ./build
+    #     branch: ${{ inputs.deploy_branch }}
+    #     commit-message: ${{ inputs.commit_message }}
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        folder: ./build
-        branch: ${{ inputs.deploy_branch }}
-        commit-message: ${{ inputs.commit_message }}
+        github_token: ${{ inputs.github_token }}
+        force_orphan: true
+        publish_dir: ./build
+        # # The following lines assign commit authorship to the official GH-Actions bot for deploys to `gh-pages` branch.
+        # # You can swap them out with your own user credentials.
+        # user_name: github-actions[bot]
+        # user_email: 41898282+github-actions[bot]@users.noreply.github.com
