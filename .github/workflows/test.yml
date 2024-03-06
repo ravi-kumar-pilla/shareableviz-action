@@ -25,6 +25,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Deploy Kedro-Viz to GH Pages
-        uses: ./
+        uses: ravi-kumar-pilla/shareableviz-action@main
         with:
           telemetry_consent: false
