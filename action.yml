@@ -59,6 +59,7 @@ runs:
       run: "echo 'consent: ${{ inputs.telemetry_consent }}' > .telemetry"
       shell: bash
     - name: Create build directory
+      id: viz-build
       run: kedro viz build
       shell: bash
     - name: Deploy to GitHub Pages
@@ -71,3 +72,4 @@ runs:
         user_email: ${{ inputs.user_email }}
         commit_message: ${{ inputs.commit_message }}
         force_orphan: true
+      if: steps.viz-build.outcome == 'success'
