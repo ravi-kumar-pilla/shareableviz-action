@@ -60,12 +60,9 @@ runs:
       shell: bash
     - name: Create build directory
       id: viz-build
-      run: kedro viz build || echo "::set-env name=BUILD_STATUS::failed"
-      shell: bash
-    - name: Check build status
       run: |
-        if [ "${{ env.BUILD_STATUS }}" == "failed" ]; then
-          echo "Build failed. Deployment skipped."
+        if kedro viz build |& tee /dev/stderr | grep -q "ERROR"; then
+          echo "::set-env name=BUILD_STATUS::failed"
           exit 1
         fi
       shell: bash
