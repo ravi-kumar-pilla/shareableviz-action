@@ -3,12 +3,12 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "spaceflights_pandas"
+name = "spaceflights_pandas_viz"
 readme = "README.md"
 dynamic = ["dependencies", "version"]
 
 [project.scripts]
-spaceflights-pandas = "spaceflights_pandas.__main__:main"
+spaceflights-pandas-viz = "spaceflights_pandas_viz.__main__:main"
 
 [project.entry-points."kedro.hooks"]
 
@@ -27,15 +27,15 @@ docs = [
 
 [tool.setuptools.dynamic]
 dependencies = {file = "requirements.txt"}
-version = {attr = "spaceflights_pandas.__version__"}
+version = {attr = "spaceflights_pandas_viz.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
 namespaces = false
 
 [tool.kedro]
-package_name = "spaceflights_pandas"
-project_name = "Spaceflights Pandas"
+package_name = "spaceflights_pandas_viz"
+project_name = "Spaceflights Pandas Viz"
 kedro_init_version = "0.19.3"
 tools = ['None']
 example_pipeline = "False"
@@ -44,7 +44,7 @@ source_dir = "src"
 [tool.pytest.ini_options]
 addopts = """
 --cov-report term-missing \
---cov src/spaceflights_pandas -ra"""
+--cov src/spaceflights_pandas_viz -ra"""
 
 [tool.coverage.report]
 fail_under = 0

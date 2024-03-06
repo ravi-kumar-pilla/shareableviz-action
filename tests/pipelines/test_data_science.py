@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from spaceflights_pandas.pipelines.data_science.nodes import split_data
+from spaceflights_pandas_viz.pipelines.data_science.nodes import split_data
 
 
 @pytest.fixture

@@ -1,8 +1,8 @@
-# Spaceflights Pandas
+# Spaceflights Pandas Viz
 
 ## Overview
 
-This is your new Kedro project, which was generated using `kedro 0.19.3`.
+This is your new Kedro project with Kedro-Viz setup, which was generated using `kedro 0.19.3`.
 
 Take a look at the [Kedro documentation](https://docs.kedro.org) to get started.
 
@@ -45,7 +45,7 @@ To configure the coverage threshold, look at the `.coveragerc` file.
 
 ## Project dependencies
 
-To see and update the dependency requirements for your project use `requirements.txt`. You can install the project requirements with `pip install -r requirements.txt`.
+To see and update the dependency requirements for your project use `requirements.txt`. Install the project requirements with `pip install -r requirements.txt`.
 
 [Further information about project dependencies](https://docs.kedro.org/en/stable/kedro_project_setup/dependencies.html#project-specific-dependencies)
 
@@ -93,6 +93,7 @@ To automatically strip out all output cell contents before committing to `git`, 
 
 > *Note:* Your output cells will be retained locally.
 
+[Further information about using notebooks for experiments within Kedro projects](https://docs.kedro.org/en/develop/notebooks_and_ipython/kedro_and_notebooks.html).
 ## Package your Kedro project
 
-[Further information about building project documentation and packaging your project](https://docs.kedro.org/en/stable/tutorial/package_a_project.html)
+[Further information about building project documentation and packaging your project](https://docs.kedro.org/en/stable/tutorial/package_a_project.html).

@@ -36,7 +36,7 @@ loggers:
   kedro:
     level: INFO
 
-  spaceflights_pandas:
+  spaceflights_pandas_viz:
     level: INFO
 
 root:

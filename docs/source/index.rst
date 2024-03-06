@@ -1,8 +1,8 @@
-.. spaceflights_pandas documentation master file, created by sphinx-quickstart.
+.. spaceflights_pandas_viz documentation master file, created by sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to project spaceflights_pandas's API docs!
+Welcome to project spaceflights_pandas_viz's API docs!
 =============================================
 
 .. toctree::

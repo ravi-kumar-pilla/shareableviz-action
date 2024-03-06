@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-# spaceflights_pandas documentation build
+# spaceflights_pandas_viz documentation build
 # configuration file, created by sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its
@@ -21,11 +21,11 @@
 import re
 
 from kedro.framework.cli.utils import find_stylesheets
-from spaceflights_pandas import __version__ as release
+from spaceflights_pandas_viz import __version__ as release
 
 # -- Project information -----------------------------------------------------
 
-project = "spaceflights_pandas"
+project = "spaceflights_pandas_viz"
 author = "Kedro"
 
 # The short X.Y version.
@@ -121,7 +121,7 @@ html_show_copyright = False
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "spaceflights_pandasdoc"
+htmlhelp_basename = "spaceflights_pandas_vizdoc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -149,8 +149,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "spaceflights_pandas.tex",
-        "spaceflights_pandas Documentation",
+        "spaceflights_pandas_viz.tex",
+        "spaceflights_pandas_viz Documentation",
         "Kedro",
         "manual",
     )
@@ -163,8 +163,8 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        "spaceflights_pandas",
-        "spaceflights_pandas Documentation",
+        "spaceflights_pandas_viz",
+        "spaceflights_pandas_viz Documentation",
         [author],
         1,
     )
@@ -178,11 +178,11 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "spaceflights_pandas",
-        "spaceflights_pandas Documentation",
+        "spaceflights_pandas_viz",
+        "spaceflights_pandas_viz Documentation",
         author,
-        "spaceflights_pandas",
-        "Project spaceflights_pandas codebase.",
+        "spaceflights_pandas_viz",
+        "Project spaceflights_pandas_viz codebase.",
         "Data-Science",
     )
 ]
