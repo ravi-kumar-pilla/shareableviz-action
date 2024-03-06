@@ -56,7 +56,7 @@ runs:
       shell: bash
     - name: Create build directory
       run: |
-        if kedro viz build |& tee /dev/stderr | grep -i -q "ERROR"; then
+        if !(kedro viz build |& tee /dev/stderr | grep -i -q "Success!"); then
           exit 1
         fi
       shell: bash
