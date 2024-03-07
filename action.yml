@@ -1,4 +1,4 @@
-name: kedro-viz-gh-deploy-test
+name: shareableviz-action
 description: This is a test action to publish kedro viz static website on GitHub Pages
 author: Ravi Kumar Pilla
 

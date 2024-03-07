@@ -1,17 +1,17 @@
+# This workflow is used to test any changes to the GitHub action
+
 name: Test kedro-viz-gh-deploy-test Action
 
 permissions:
   contents: write
 
 on:
-  pull_request:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    paths:
+      - "action.yml"
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch the repository
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: '3.11'
       - name: Install Project Dependencies
         run: |
           python -m pip install --upgrade pip
