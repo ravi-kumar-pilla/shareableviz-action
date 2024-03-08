@@ -22,10 +22,12 @@ jobs:
           pip install -r requirements.txt
       - name: Create build directory
         run: kedro viz build
-      - name: Create Tarball
-        run: |
-          tar -czvf gh-pages.tar.gz ./build
+      # - name: Create Tarball
+      #   run: |
+      #     tar -czvf gh-pages.tar.gz ./build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: './build'
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
