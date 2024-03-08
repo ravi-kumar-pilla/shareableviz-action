@@ -65,7 +65,7 @@ runs:
         fi
       shell: bash
     - name: Deploy to GitHub Pages with publish branch as source
-      if: ${{ inputs.publishing_source }} == 'branch'
+      if: ${{ inputs.publishing_source == 'branch' }}
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ inputs.github_token }}
@@ -76,10 +76,10 @@ runs:
         commit_message: ${{ inputs.commit_message }}
         force_orphan: true
     - name: Upload Pages artifact
-      if: ${{ inputs.publishing_source }} == 'workflow'
+      if: ${{ inputs.publishing_source == 'workflow' }}
       uses: actions/upload-pages-artifact@v3
       with:
         path: "./build"
     - name: Deploy to GitHub Pages
-      if: ${{ inputs.publishing_source }} == 'workflow'
+      if: ${{ inputs.publishing_source == 'workflow' }}
       uses: actions/deploy-pages@v4

@@ -4,6 +4,8 @@ name: Test shareableviz-action
 
 permissions:
   contents: write
+  # pages: write
+  id-token: write
 
 on:
   push:
