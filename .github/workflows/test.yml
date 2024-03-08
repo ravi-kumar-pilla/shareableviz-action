@@ -1,6 +1,6 @@
 # This workflow is used to test any changes to the GitHub action
 
-name: Test kedro-viz-gh-deploy-test Action
+name: Test shareableviz-action
 
 permissions:
   contents: write
