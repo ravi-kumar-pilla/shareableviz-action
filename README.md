@@ -24,10 +24,13 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
 
 ## Prerequisites
 
-- **GitHub Pages Setup:** Configure your repository for [GitHub Pages](https://docs.github.com/en/pages/quickstart)
+- **GitHub Pages Setup:** Configure your repository for [GitHub Pages](https://docs.github.com/en/pages/quickstart).
 - **Directory structure:** This action considers your Kedro-project to be in the root directory
 - **Kedro-project dependencies:** Install all the Kedro-project dependencies before using this action in your workflow
 - **Python-version:** You need to have an environment with `python>=3.9` in your workflow
+
+**NOTE:** While configuring your repository for GitHub Pages, you have two publishing source options. You can either choose a `branch` or `a custom GitHub Actions workflow`. If you choose a branch, the build artifacts will be uploaded to the `publish_branch` you pass as an input to the action, which defaults to `gh-pages`. If you choose a custom GitHub Actions workflow, you need to mention that in the input `publishing_source` to the action and no artifacts/branch will be created. Please find more information on configuring a publishing source for github pages site in the [official docs](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
 
 ## Usage
 
@@ -55,6 +58,11 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
     # Default: '3.11'
     python_version: ''
 
+    # The publishing source for GitHub pages. This can be either 
+    # 'branch' or 'workflow' based on your GitHub Pages configuration
+    # Default: 'branch'
+    publishing_source: ''
+    
     # The git config user.name or the owner of the commit.
     # Default: 'github-actions[bot]'
     user_name: ''
@@ -75,33 +83,50 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
     ```yaml
         # An example workflow configuration
 
-        name: Publish and share Kedro Viz # The name of your workflow
+        # The name of your workflow
+        name: Publish and share Kedro Viz 
         
         permissions:
-            contents: write # These are the minimum permissions required to use the action
-
-        on: # This can be configured based on your requirements (i.e., the workflow trigger condition)
+            
+            # The contents permission is required to use the action 
+            # if your GitHub publishing source is a branch
+            contents: write 
+            
+            # The pages and id-token permissions are required to use 
+            # the action if your GitHub publishing source is a custom 
+            # GitHub Actions workflow
+            pages: write 
+            id-token: write
+        
+        on: 
+            # This can be configured based on your requirements 
+            # (i.e., the workflow trigger condition)
             pull_request:
             push:
                 branches:
                     - main
             workflow_dispatch:
 
-        jobs: # Here we mentioned the minimal setup
+        # We mentioned the minimal jobs for the workflow
+        jobs: 
             deploy:
-                runs-on: ubuntu-latest # The action is currently tested on ubuntu-latest (Recommended)
+                # The action is currently tested on ubuntu-latest (Recommended)
+                runs-on: ubuntu-latest 
                 steps:
                     - name: Fetch the repository
                       uses: actions/checkout@v4
                     - name: Set up Python
                       uses: actions/setup-python@v5
                       with:
-                        python-version: 3.11 # Requires python >= 3.9
-                    - name: Install Project Dependencies # This installs the Kedro-project dependencies
+                        # Requires python >= 3.9
+                        python-version: 3.11 
+                      # This installs the Kedro-project dependencies
+                    - name: Install Project Dependencies
                       run: |
                         python -m pip install --upgrade pip
                         pip install -r requirements.txt
-                    - name: Deploy Kedro-Viz to GH Pages # Using the action
+                      # Using the action
+                    - name: Deploy Kedro-Viz to GH Pages 
                       uses: ravi-kumar-pilla/shareableviz-action@v1     
     ```
 
@@ -109,9 +134,22 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
 
 After you've completed the configuration, trigger the workflow as per the workflow trigger condition.
 
-- The GitHub workflow `Publish and share Kedro Viz` should start with your commit message
-- Once the workflow is successfully completed, the artifacts of your Kedro-Viz static site will be uploaded to the `publish-branch` input specified to the action. Defaults to `gh-pages`.
-- If you have configured GitHub Pages for your repository, you can access the static site at `http://<username>.github.io/<repo-name>`
+- The GitHub workflow `Publish and share Kedro Viz` should start. You can find it in the Actions tab with your commit message.
+- Once the workflow is successfully completed, the artifacts of your Kedro-Viz static site will be uploaded to the `publish-branch` input specified to the action if your GitHub pages publishing source is branch.
+- If your GitHub pages publishing source is a custom GitHub Actions workflow, you need to select the above workflow `.github/workflows/shareableviz.yml` as the source.
+- You can access the static site at `http://<username>.github.io/<repo-name>`
+
+## Credits
+
+The list of third party actions used in this project, with due credits to their authors and license terms. More details can be found inside the folder of each action.
+
+### Deploy to GitHub Pages when publishing source is branch
+
+We use the GitHub action [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) to deploy the static site to a publish branch which is released under [MIT license](https://github.com/peaceiris/actions-gh-pages?tab=MIT-1-ov-file#readme)
+
+### Deploy to GitHub Pages when publishing source is a custom GitHub Action Workflow
+
+We use the GitHub actions [actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact) and [actions/deploy-pages](https://github.com/actions/deploy-pages) which are released under MIT license.
 
 ## License
 
