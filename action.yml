@@ -27,6 +27,10 @@ inputs:
     description: "Set a version of python for the deployment. Defaults to 3.11"
     required: false
     default: "3.11"
+  publishing_source:
+    description: "Set a publishing source for GitHub pages. Defaults to branch"
+    required: false
+    default: "branch"
   user_name:
     description: "Set git config user.name. Defaults to github-actions[bot]"
     required: false
@@ -60,7 +64,8 @@ runs:
           exit 1
         fi
       shell: bash
-    - name: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages with publish branch as source
+      if: ${{ inputs.publishing_source }} == 'branch'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ inputs.github_token }}
@@ -70,3 +75,11 @@ runs:
         user_email: ${{ inputs.user_email }}
         commit_message: ${{ inputs.commit_message }}
         force_orphan: true
+    - name: Upload Pages artifact
+      if: ${{ inputs.publishing_source }} == 'workflow'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: "./build"
+    - name: Deploy to GitHub Pages
+      if: ${{ inputs.publishing_source }} == 'workflow'
+      uses: actions/deploy-pages@v4

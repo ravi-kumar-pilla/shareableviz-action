@@ -28,3 +28,4 @@ jobs:
         uses: ravi-kumar-pilla/shareableviz-action@main
         with:
           telemetry_consent: false
+          publishing_source: 'workflow'
