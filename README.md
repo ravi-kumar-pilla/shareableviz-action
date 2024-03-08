@@ -145,7 +145,7 @@ The list of third party actions used in this project, with due credits to their 
 
 ### Deploy to GitHub Pages when publishing source is branch
 
-We use the GitHub action [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) to deploy the static site to a publish branch which is released under [MIT license](https://github.com/peaceiris/actions-gh-pages?tab=MIT-1-ov-file#readme)
+We use the GitHub action [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) to deploy the static site to a publish branch which is released under MIT license.
 
 ### Deploy to GitHub Pages when publishing source is a custom GitHub Action Workflow
 
