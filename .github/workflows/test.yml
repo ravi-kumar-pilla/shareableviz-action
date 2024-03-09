@@ -37,3 +37,4 @@ jobs:
         uses: ravi-kumar-pilla/shareableviz-action@main
         with:
           telemetry_consent: false
+          project_path: 'demo-project'
