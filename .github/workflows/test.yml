@@ -8,11 +8,6 @@ permissions:
   id-token: write
 
 on:
-  workflow_call:
-    inputs:
-      branch:
-        type: string
-        default: ''
   push:
     branches:
       - main
