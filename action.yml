@@ -75,7 +75,7 @@ runs:
       with:
         github_token: ${{ inputs.github_token }}
         publish_branch: ${{ inputs.publish_branch }}
-        publish_dir: ./build
+        publish_dir: '${{ inputs.project_path }}/build'
         user_name: ${{ inputs.user_name }}
         user_email: ${{ inputs.user_email }}
         commit_message: ${{ inputs.commit_message }}
@@ -84,7 +84,7 @@ runs:
       if: ${{ inputs.publishing_source == 'workflow' }}
       uses: actions/upload-pages-artifact@v3
       with:
-        path: "./build"
+        path: '${{ inputs.project_path }}/build'
     - name: Deploy to GitHub Pages
       if: ${{ inputs.publishing_source == 'workflow' }}
       uses: actions/deploy-pages@v4
