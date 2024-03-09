@@ -25,7 +25,6 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
 ## Prerequisites
 
 - **GitHub Pages Setup:** Configure your repository for [GitHub Pages](https://docs.github.com/en/pages/quickstart).
-- **Directory structure:** This action considers your Kedro-project to be in the root directory
 - **Kedro-project dependencies:** Install all the Kedro-project dependencies before using this action in your workflow
 - **Python-version:** You need to have an environment with `python>=3.9` in your workflow
 
@@ -42,14 +41,10 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
     # Default: ${{ github.token }}
     github_token: ''
 
-    # The GitHub pages publish branch to upload the artifacts.
-    # Default: 'gh-pages'
-    publish_branch: ''
-
-    # The commit message for the deployment. Defaults to your original commit message.
-    # Default: ${{ github.event.head_commit.message }}
-    commit_message: ''
-
+    # The Kedro-project path to build the Kedro-Viz artifacts.
+    # Default: '.'
+    project_path: ''
+    
     # Your consent to participate in Kedro-Telemetry.
     # Default: true
     telemetry_consent: ''
@@ -62,12 +57,24 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
     # 'branch' or 'workflow' based on your GitHub Pages configuration
     # Default: 'branch'
     publishing_source: ''
-    
+
+    # The GitHub pages publish branch to upload the artifacts 
+    # if your publishing_source is a branch
+    # Default: 'gh-pages'
+    publish_branch: ''
+
+    # The commit message for the deployment, if your publishing_source is a branch.
+    # Defaults to your original commit message.
+    # Default: ${{ github.event.head_commit.message }}
+    commit_message: ''
+
     # The git config user.name or the owner of the commit.
+    # if your publishing_source is a branch.
     # Default: 'github-actions[bot]'
     user_name: ''
 
     # The git config user.email or the email of the commit owner.
+    # if your publishing_source is a branch.
     # Default: 'github-actions[bot]@users.noreply.github.com'
     user_email: ''
 
