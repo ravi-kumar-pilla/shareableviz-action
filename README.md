@@ -124,6 +124,9 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
                     - name: Install Project Dependencies
                       run: |
                         python -m pip install --upgrade pip
+                        # This is not required if your Kedro Project 
+                        # is at the root of your GitHub Repository
+                        cd demo-project 
                         pip install -r requirements.txt
                       # Using the action
                     - name: Deploy Kedro-Viz to GH Pages 
@@ -143,7 +146,7 @@ After you've completed the configuration, trigger the workflow as per the workfl
 
 The list of third party actions used in this project, with due credits to their authors and license terms. More details can be found inside the folder of each action.
 
-### Deploy to GitHub Pages when publishing source is branch
+### Deploy to GitHub Pages when publishing source is a branch
 
 We use the GitHub action [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) to deploy the static site to a publish branch which is released under MIT license.
 
