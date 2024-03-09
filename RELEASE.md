@@ -1,6 +1,6 @@
 # Release 1.0.0:
 
-The initial release of Kedro shareableviz action
+The initial release of shareableviz action
 
 ## Major features and improvements
 
