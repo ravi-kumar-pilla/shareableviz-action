@@ -55,16 +55,18 @@ runs:
         python-version: ${{ inputs.python_version }}
         cache: "pip"
     - name: Install Kedro-Viz
-      shell: bash
       run: |
         python -m pip install --upgrade pip
         python -m pip install "kedro-viz>=7.1.0"
+      shell: bash
+    - name: Navigate to Kedro-project
+      run: cd ${{ inputs.project_path }}
+      shell: bash
     - name: Consent to the use of Kedro-Telemetry
       run: "echo 'consent: ${{ inputs.telemetry_consent }}' > .telemetry"
       shell: bash
     - name: Create build directory
       run: |
-        cd ${{ inputs.project_path }}
         if !(kedro viz build |& tee /dev/stderr | grep -i -q "Success!"); then
           exit 1
         fi
@@ -75,7 +77,7 @@ runs:
       with:
         github_token: ${{ inputs.github_token }}
         publish_branch: ${{ inputs.publish_branch }}
-        publish_dir: '${{ inputs.project_path }}/build'
+        publish_dir: './build'
         user_name: ${{ inputs.user_name }}
         user_email: ${{ inputs.user_email }}
         commit_message: ${{ inputs.commit_message }}
@@ -84,7 +86,7 @@ runs:
       if: ${{ inputs.publishing_source == 'workflow' }}
       uses: actions/upload-pages-artifact@v3
       with:
-        path: '${{ inputs.project_path }}/build'
+        path: './build'
     - name: Deploy to GitHub Pages
       if: ${{ inputs.publishing_source == 'workflow' }}
       uses: actions/deploy-pages@v4
