@@ -62,7 +62,7 @@ runs:
     - name: Consent to the use of Kedro-Telemetry
       run: |
         cd ${{ inputs.project_path }}
-        "echo 'consent: ${{ inputs.telemetry_consent }}' > .telemetry"
+        echo 'consent: ${{ inputs.telemetry_consent }}' > .telemetry
       shell: bash
     - name: Create build directory
       run: |
