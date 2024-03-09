@@ -34,13 +34,8 @@ jobs:
       action_name: ${{ steps.version_check.outputs.action_name }}
       action_version: ${{ steps.version_check.outputs.action_version }}
 
-  test-shareableviz-action:
-    needs: check-version
-    if: ${{ needs.check-version.outputs.new_release == 'true' }}
-    uses: ./.github/workflows/test.yml
-
   prepare-release:
-    needs: [check-version, test-shareableviz-action]
+    needs: check-version
     if: ${{ needs.check-version.outputs.new_release == 'true' }}
     runs-on: ubuntu-latest
     steps:
