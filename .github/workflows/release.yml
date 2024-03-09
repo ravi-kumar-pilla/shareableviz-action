@@ -1,5 +1,8 @@
 name: Release
 
+permissions:
+  contents: write
+
 on:
   pull_request:
     branches:
@@ -39,9 +42,9 @@ jobs:
     if: ${{ needs.check-version.outputs.new_release == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - name: Extract release notes from ${{needs.check-version.outputs.action_name}}/RELEASE.md
@@ -50,16 +53,16 @@ jobs:
           python utils/extract_release_notes.py \
           "RELEASE.md" \
           "Release ${{needs.check-version.outputs.action_version}}"
-      # - name: Create GitHub Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     tag_name: v${{needs.check-version.outputs.action_version}}
-      #     name: v${{needs.check-version.outputs.action_version}}
-      #     body_path: release_body.txt
-      #     draft: false
-      #     prerelease: false
-      #     # token: ${{ secrets.GH_TAGGING_TOKEN }}
-      #     files: |
-      #       action.yml
-      #       README.md
-      #       LICENSE.md
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{needs.check-version.outputs.action_version}}
+          name: v${{needs.check-version.outputs.action_version}}
+          body_path: release_body.txt
+          draft: false
+          prerelease: false
+          # token: ${{ secrets.GH_TAGGING_TOKEN }}
+          files: |
+            action.yml
+            README.md
+            LICENSE.md
