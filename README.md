@@ -1,22 +1,4 @@
-# Kedro shareableviz Action
-
-![Kedro Logo Banner - Light](https://raw.githubusercontent.com/kedro-org/kedro/main/.github/demo-dark.png#gh-dark-mode-only)
-![Kedro Logo Banner - Dark](https://raw.githubusercontent.com/kedro-org/kedro/main/.github/demo-light.png#gh-light-mode-only)
-
-<br />
-<p align="center">
-
-![Kedro-Viz Pipeline Visualisation](https://raw.githubusercontent.com/kedro-org/kedro-viz/main/.github/img/banner.png)
-
-</p>
-
-<p align="center">
-✨ <em> Data Science Pipelines. Beautifully Designed</em> ✨
-<br />
-Live Demo: <a href="https://demo.kedro.org/" target="_blank">https://demo.kedro.org/</a>
-</p>
-
-<br />
+# Shareableviz Action
 
 ## Overview
 
@@ -137,7 +119,11 @@ A GitHub action which deploys your Kedro-Viz static site on GitHub pages. This a
                         pip install -r requirements.txt
                       # Using the action
                     - name: Deploy Kedro-Viz to GH Pages 
-                      uses: ravi-kumar-pilla/shareableviz-action@v1     
+                      uses: ravi-kumar-pilla/shareableviz-action@v1
+                      with:
+                        # This is not required if your Kedro Project 
+                        # is at the root of your GitHub Repository
+                        project_path: 'demo-project'     
     ```
 
 ## Test the action
