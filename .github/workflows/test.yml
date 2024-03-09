@@ -10,7 +10,14 @@ permissions:
 on:
   push:
     branches:
-      - "*"
+      - main
+    paths-ignore:
+      - "*.md"
+      - "VERSION"
+  pull_request:
+    paths-ignore:
+      - "*.md"
+      - "VERSION"
 
 jobs:
   test:

@@ -34,8 +34,13 @@ jobs:
       action_name: ${{ steps.version_check.outputs.action_name }}
       action_version: ${{ steps.version_check.outputs.action_version }}
 
+  test-shareableviz-action:
+    needs: check-version
+    if: ${{ needs.check-version.outputs.new_release == 'true' }}
+    uses: ./.github/workflows/test.yml
+
   prepare-release:
-    needs: [check-version]
+    needs: [check-version, test-shareableviz-action]
     if: ${{ needs.check-version.outputs.new_release == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -50,16 +55,16 @@ jobs:
           python utils/extract_release_notes.py \
           "RELEASE.md" \
           "Release ${{needs.check-version.outputs.action_version}}"
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{needs.check-version.outputs.action_version}}
-          name: v${{needs.check-version.outputs.action_version}}
-          body_path: release_body.txt
-          draft: false
-          prerelease: false
-          # token: ${{ secrets.GH_TAGGING_TOKEN }}
-          files: |
-            action.yml
-            README.md
-            LICENSE.md
+      # - name: Create GitHub Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: v${{needs.check-version.outputs.action_version}}
+      #     name: v${{needs.check-version.outputs.action_version}}
+      #     body_path: release_body.txt
+      #     draft: false
+      #     prerelease: false
+      #     # token: ${{ secrets.GH_TAGGING_TOKEN }}
+      #     files: |
+      #       action.yml
+      #       README.md
+      #       LICENSE.md
